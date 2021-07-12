@@ -4,3 +4,4 @@
 点击Click Counter可以记录点击该按钮的次数，但清零功能暂未实现
 切换开关Big Model状态，能够改变中间TextView的显示字体大小
 Password栏可以输入密码（暂时没有完成登录验证的功能）
+打包的apk文件在demo中
