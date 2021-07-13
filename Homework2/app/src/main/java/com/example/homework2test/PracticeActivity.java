@@ -14,6 +14,7 @@ public class PracticeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_practice);
+        // test toast
         Button btn1 = findViewById(R.id.button_toast);
         btn1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -22,6 +23,8 @@ public class PracticeActivity extends AppCompatActivity {
                 Toast.makeText(PracticeActivity.this,"button clicked",Toast.LENGTH_SHORT).show();
             }
         });
+        // 圆角按钮尝试
+
     }
 
 
