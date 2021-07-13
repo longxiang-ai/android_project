@@ -7,7 +7,7 @@ public class TestDataSet {
 
     public static List<TestData> getData() {
         List<TestData> result = new ArrayList();
-        result.add(new TestData("让人忘记原唱的歌手", "524.6w"));
+        result.add(new TestData("让人忘记原唱的歌手", "热","524.6w"));
         result.add(new TestData("林丹退役", "433.6w"));
         result.add(new TestData("你在教我做事？", "357.8w"));
         result.add(new TestData("投身乡村教育的燃灯者", "333.6w"));

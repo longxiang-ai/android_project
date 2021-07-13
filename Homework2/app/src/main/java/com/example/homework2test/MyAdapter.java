@@ -1,6 +1,7 @@
 package com.example.homework2test;
 
 
+import android.content.res.AssetManager;
 import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -93,6 +94,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
         private TextView tvIndex;
         private TextView tvTitle;
         private TextView tvHot;
+        private TextView tvType;
         private View contentView;
 
 
@@ -100,6 +102,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
             super(v);
             contentView = v;
             tvIndex = v.findViewById(R.id.tv_index);
+            tvType = v.findViewById(R.id.tv_type);
             tvTitle = v.findViewById(R.id.tv_title);
             tvHot = v.findViewById(R.id.tv_hot);
         }
@@ -107,6 +110,8 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
         public void onBind(int position, TestData data) {
             tvIndex.setText(new StringBuilder().append(position).append(".  ").toString());
             tvTitle.setText(data.title);
+            tvType.setText(data.type);
+
             tvHot.setText(data.hot);
             if (position < 3) {
                 tvIndex.setTextColor(Color.parseColor("#FFD700"));

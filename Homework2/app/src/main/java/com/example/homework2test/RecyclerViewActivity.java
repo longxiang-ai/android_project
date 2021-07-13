@@ -1,8 +1,11 @@
 package com.example.homework2test;
 
+import android.content.res.AssetManager;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -32,7 +35,9 @@ public class RecyclerViewActivity extends AppCompatActivity implements MyAdapter
         setContentView(R.layout.activity_recyclerview);
         Log.i(TAG, "RecyclerViewActivity onCreate");
         // 初始化界面
+
         initView();
+
     }
 
     private void initView() {
