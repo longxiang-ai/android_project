@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">Homework2Test</string>
     <string name="Prac_Active_name">PracticeActivity</string>
+    <string name="Kirito">黑衣剑士</string>
+    <string name="getInfo">2021\-07\-13 获得</string>
+    <string name="num">获得次数</string>
 </resources>
