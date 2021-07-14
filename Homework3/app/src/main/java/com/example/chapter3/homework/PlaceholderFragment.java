@@ -56,17 +56,17 @@ public class PlaceholderFragment extends Fragment {
         //创建Adapter
         mAdapter = new MyAdapter(TestDataSet.getData());
         //设置Adapter每个item的点击事件
-        mAdapter.setOnItemClickListener(new MyAdapter.IOnItemClickListener() {
-            @Override
-            public void onItemCLick(int position, TestData data) {
-
-            }
-
-            @Override
-            public void onItemLongCLick(int position, TestData data) {
-
-            }
-        });
+//        mAdapter.setOnItemClickListener(new MyAdapter.IOnItemClickListener() {
+//            @Override
+//            public void onItemCLick(int position, TestData data) {
+//
+//            }
+//
+//            @Override
+//            public void onItemLongCLick(int position, TestData data) {
+//
+//            }
+//        });
         //设置Adapter
         recyclerView.setAdapter(mAdapter);
 //        recyclerView.addItemDecoration(itemDecoration);
