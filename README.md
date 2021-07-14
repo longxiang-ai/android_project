@@ -19,3 +19,10 @@ Password栏可以输入密码（暂时没有完成登录验证的功能）
 
 打包生成的.apk文件也已在homework2目录下。
 
+# Homework3
+
+已经根据作业要求实现如下的三个功能
+
+1. 在CH3EX1 activity中，实现seekBar对lottie动画播放进度的操纵，以及通过CheckBox控制播放模式
+2. 在CH3EX2 activity中，实现彩虹字体，scaleX,scaleY以及alpha的规则属性动画
+3. 在CH3EX3 activity中，实现带有tap的fragment变化，其中动画会在出现后五秒钟时渐弱淡出，相应的聊天框会在五秒钟时淡入。由于聊天框部分的设计比较困难，所以这里复用了Homework2中的recyclerview进行了实现。
