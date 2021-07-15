@@ -6,9 +6,11 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.RectF;
 import android.os.Handler;
+import android.os.Message;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.annotation.Nullable;
 
@@ -33,7 +35,7 @@ public class ClockView extends View {
     private static final float SECOND_NEEDLE_WIDTH = 4; // 秒针的宽度
 
     private Calendar calendar = Calendar.getInstance();
-
+    private String timeString="xx:yy:zz";
     private float radius = 0; // 表盘半径
     private float centerX = 0; // 表盘圆心X坐标
     private float centerY = 0; // 表盘圆心Y坐标
@@ -44,8 +46,20 @@ public class ClockView extends View {
     private Paint numberPaint = new Paint();
     // 表盘数字字体
     private Paint.FontMetrics fontMetrics = new Paint.FontMetrics();
-
+    // 设置handler
     private Handler handler = new Handler();
+
+    private Runnable myRun = new Runnable() {
+        int count = 0;
+        @Override
+        public void run() {
+            count ++;
+            postInvalidate();
+            Log.i("run","尝试:"+count);
+        }
+
+    };
+
 
     public ClockView(Context context) {
         super(context);
@@ -114,9 +128,21 @@ public class ClockView extends View {
         drawUnit(canvas);
         drawTimeNeedles(canvas);// TODO 绘制表针
         drawTimeNumbers(canvas);
+        drawTimeText(canvas);// 实现钟表内容的绘制
         // TODO 实现时间的转动，每一秒刷新一次
-        handler.sendEmptyMessage(1);
+        handler.postDelayed(myRun,1000);
     }
+
+    private void drawTimeText(Canvas canvas) {
+        Time time = getCurrentTime();
+        String hour = time.getHours() >= 10 ? time.getHours()+"" : "0"+time.getHours();
+        String minute = time.getMinutes() >= 10 ? time.getMinutes()+"" : "0"+ time.getMinutes() ;
+        String second = time.getSeconds() >= 10 ? time.getSeconds()+"" : "0"+time.getSeconds();
+        timeString = hour + ":" + minute + ":" + second ;
+
+        canvas.drawText(timeString,centerX,centerY-radius/2,numberPaint);
+    }
+
 
     // 绘制表盘上的刻度
     private void drawUnit(Canvas canvas) {
@@ -153,6 +179,7 @@ public class ClockView extends View {
         int hourDegree = (hour-3)*30 + minute/2;
         Log.i("In Time Needle Paint","Now hourDegree:"+hourDegree);
         needlePaint.setStrokeWidth(HOUR_NEEDLE_WIDTH);
+        needlePaint.setColor(Color.WHITE);
          float startX = centerX;
          float startY = centerY;
          float endX_hour = (float) (centerX + radius * HOUR_NEEDLE_LENGTH_RATIO * Math.cos(Math.toRadians(hourDegree)));
@@ -163,6 +190,7 @@ public class ClockView extends View {
         int minuteDegree = (minute-15) * 6;
         Log.i("In Time Needle Paint","Now minuteDegree:"+minuteDegree);
         needlePaint.setStrokeWidth(MINUTE_NEEDLE_WIDTH);
+        needlePaint.setColor(Color.WHITE);
         float endX_minute = (float) (centerX + radius * MINUTE_NEEDLE_LENGTH_RATIO * Math.cos(Math.toRadians(minuteDegree)));
         float endY_minute = (float) (centerY + radius * MINUTE_NEEDLE_LENGTH_RATIO * Math.sin(Math.toRadians(minuteDegree)));
         canvas.drawLine(startX,startY,endX_minute,endY_minute,needlePaint);
