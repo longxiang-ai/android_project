@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -14,11 +15,23 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.bytedance.practice5.model.MessageListResponse;
 import com.bytedance.practice5.model.UploadResponse;
 import com.facebook.drawee.view.SimpleDraweeView;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
+import java.io.BufferedReader;
 import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
+import java.util.Base64;
 import java.util.List;
+import java.util.Map;
 
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
@@ -135,6 +148,11 @@ public class UploadActivity extends AppCompatActivity {
         //TODO 5
         // 使用api.submitMessage()方法提交留言
         // 如果提交成功则关闭activity，否则弹出toast
+        submitMessageWithretrofit(to,content,coverImageData);
+//        submitMessageWithURLConnection(to,content,coverImageData);
+    }
+
+    private void submitMessageWithretrofit(String to, String content,byte[] coverImageData ) {
         MultipartBody.Part _from = MultipartBody.Part.createFormData("from",USER_NAME);
         MultipartBody.Part _to = MultipartBody.Part.createFormData("to",to);
         MultipartBody.Part _content = MultipartBody.Part.createFormData("content",content);
@@ -168,13 +186,74 @@ public class UploadActivity extends AppCompatActivity {
             Log.i("upload","尝试上传失败");
             Toast.makeText(this,e.toString(),Toast.LENGTH_SHORT).show();
         }
-
     }
 
 
-    // TODO 7 选做 用URLConnection的方式实现提交
-    private void submitMessageWithURLConnection(){
+    //TODO 7 选做 用URLConnection的方式实现提交
+    // 这个写的还是蛮困难的，不太会转换这个格式……
+    // 但除了写参数的格式外其他的应该没什么问题了
+    private void submitMessageWithURLConnection(String to, String content,byte[] coverImageData){
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    SMWUC(to,content,coverImageData);
+                }
+            }).start();
+    }
+    private void SMWUC(String to, String content, byte[] coverImageData) {
+        try{
+            Log.i("upload","尝试上传");
+            // 以下为不同之处
+            // -------------------------------------------------------------
+//            String urlStr = String.format(BASE_URL+"messages?student_id=%s&extra_value=%s",STUDENT_ID,"");
+//            String urlStr = String.format(BASE_URL+"messages?student_id=%s",STUDENT_ID);
+            String urlStr = BASE_URL+"messages";
+            try {
+                URL url = new URL(urlStr);
+                Log.d("URL:","当前的ulrStr:"+urlStr);
+                HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+                conn.setConnectTimeout(6000);
+                // 这里选择POSTmethod以进行上传
+                conn.setRequestMethod("POST");
+                conn.setRequestProperty("accept", "WkpVLWJ5dGVkYW5jZS1hbmRyb2lk");
+                conn.setDoOutput(true);
+                conn.setUseCaches(false);
+                StringBuffer param = new StringBuffer();
 
+                param.append("student_id="+STUDENT_ID);
+                param.append("&extra_value=\"\"");
+                param.append("&from="+USER_NAME);
+                param.append("&to="+to);
+                param.append("&content=").append(content);
+                param.append("image_url=").append("https://lf3-hscdn-tos.pstatp.com/obj/inspirecloud-file/baas/tt41nq/4a72070720be5af9_1626443561493.png");
+//                GsonConverterFactory gson = GsonConverterFactory.create();
+//                gson.requestBodyConverter(to)
+//                param.append("&image_w=").append("600");
+//                param.append("&image_h=").append("414");
+                // 创建一个输出流
+                Log.d("u","当前的param格式"+param);
+                OutputStream out = conn.getOutputStream();
+                out.write(param.toString().getBytes("UTF-8"));
+                out.close();
+                conn.disconnect();
+            } catch (Exception e) {
+                e.printStackTrace();
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Log.d("exception:","网络异常："+e.toString());
+                        Toast.makeText(UploadActivity.this, "网络异常" + e.toString(), Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
+            // ---------------------------------------------------------
+            finish();
+        }
+        catch (Exception e)
+        {
+            Log.i("upload","尝试上传失败");
+            Toast.makeText(this,e.toString(),Toast.LENGTH_SHORT).show();
+        }
     }
 
 
