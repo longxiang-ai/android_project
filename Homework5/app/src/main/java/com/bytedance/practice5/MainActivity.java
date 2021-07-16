@@ -101,16 +101,14 @@ public class MainActivity extends AppCompatActivity {
     }
     // TODO 用HttpUrlConnection获取数据
     private MessageListResponse getDataFromInternet(String studentId) {
-
+        Log.i("getDataFromInternet","尝试获取Internet Data,StudentID="+studentId);
         String urlStr;
         if (studentId != null)
         {
-            Log.i("getDataFromInternet","尝试获取Internet Data,StudentID="+studentId);
             urlStr = BASE_URL+"/messages"+"?student_id="+studentId;
         }
         else
         {
-            Log.i("getDataFromInternet","尝试获取Internet Data,StudentID="+studentId);
             urlStr = BASE_URL+"/messages";
         }
         MessageListResponse result = null;
