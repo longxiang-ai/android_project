@@ -128,7 +128,9 @@ public class MainActivity extends AppCompatActivity {
             }
             else
             {
-                // TODO 错误处理
+                Exception exception = new Exception("网络未知错误");
+                conn.disconnect();
+                throw exception;
             }
             conn.disconnect();
         }
