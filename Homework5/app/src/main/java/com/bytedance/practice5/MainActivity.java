@@ -89,11 +89,9 @@ public class MainActivity extends AppCompatActivity {
                 MessageListResponse response = getDataFromInternet(studentId);
                 if(response != null)
                 {
-                    // TODO 这里要写什么？
                     new Handler(getMainLooper()).post(new Runnable() {
                         @Override
                         public void run() {
-                            // TODO 这里run什么？
                             adapter.setData(response.feeds);
                         }
                     });
@@ -103,14 +101,16 @@ public class MainActivity extends AppCompatActivity {
     }
     // TODO 用HttpUrlConnection获取数据
     private MessageListResponse getDataFromInternet(String studentId) {
-        Log.i("getDataFromInternet","尝试获取Internet Data");
+
         String urlStr;
         if (studentId != null)
         {
-            urlStr = BASE_URL+"/messages/"+studentId;
+            Log.i("getDataFromInternet","尝试获取Internet Data,StudentID="+studentId);
+            urlStr = BASE_URL+"/messages"+"?student_id="+studentId;
         }
         else
         {
+            Log.i("getDataFromInternet","尝试获取Internet Data,StudentID="+studentId);
             urlStr = BASE_URL+"/messages";
         }
         MessageListResponse result = null;
