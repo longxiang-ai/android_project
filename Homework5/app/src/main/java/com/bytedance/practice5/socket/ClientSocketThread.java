@@ -23,5 +23,6 @@ public class ClientSocketThread extends Thread {
     public void run() {
         // TODO 6 用socket实现简单的HEAD请求（发送content）
         //  将返回结果用callback.onresponse(result)进行展示
+
     }
 }

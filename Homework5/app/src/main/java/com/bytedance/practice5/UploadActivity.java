@@ -18,6 +18,7 @@ import com.bytedance.practice5.model.UploadResponse;
 import com.facebook.drawee.view.SimpleDraweeView;
 
 import java.io.InputStream;
+import java.util.List;
 
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
@@ -27,6 +28,11 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+
+import static com.bytedance.practice5.Constants.BASE_URL;
+import static com.bytedance.practice5.Constants.STUDENT_ID;
+import static com.bytedance.practice5.Constants.USER_NAME;
+import static com.bytedance.practice5.Constants.token;
 
 public class UploadActivity extends AppCompatActivity {
     private static final String TAG = "chapter5";
@@ -87,7 +93,13 @@ public class UploadActivity extends AppCompatActivity {
     private void initNetwork() {
         //TODO 3
         // 创建Retrofit实例
+        final Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
         // 生成api对象
+        api = retrofit.create(IApi.class);
+
     }
 
     private void getFile(int requestCode, String type, String title) {
@@ -123,6 +135,40 @@ public class UploadActivity extends AppCompatActivity {
         //TODO 5
         // 使用api.submitMessage()方法提交留言
         // 如果提交成功则关闭activity，否则弹出toast
+        MultipartBody.Part _from = MultipartBody.Part.createFormData("from",USER_NAME);
+        MultipartBody.Part _to = MultipartBody.Part.createFormData("to",to);
+        MultipartBody.Part _content = MultipartBody.Part.createFormData("content",content);
+        MultipartBody.Part _coverPart = MultipartBody.Part. createFormData ("image",
+                "cover.png",
+                RequestBody.create(MediaType. parse ("multipart/form-data"),
+                        coverImageData));
+        try{
+            Log.i("upload","尝试上传");
+            Call<UploadResponse> repos = api.submitMessage(STUDENT_ID,"",_from,_to,_content,_coverPart,token);
+            repos.enqueue(new Callback<UploadResponse>() {
+                @Override
+                public void onResponse(final Call<UploadResponse> call, final Response<UploadResponse> response) {
+                    if (!response.isSuccessful()) {
+                        return;
+                    }
+                    final UploadResponse repoList = response.body();
+                    if (repoList == null) {
+                        return;
+                    }
+                }
+                @Override
+                public void onFailure(final Call<UploadResponse> call, final Throwable t) {
+                    t.printStackTrace();
+                }
+            });
+            finish();
+        }
+        catch (Exception e)
+        {
+            Log.i("upload","尝试上传失败");
+            Toast.makeText(this,e.toString(),Toast.LENGTH_SHORT).show();
+        }
+
     }
 
 
