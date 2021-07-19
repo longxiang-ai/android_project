@@ -105,9 +105,6 @@ public class NoteActivity extends AppCompatActivity {
             public void run() {
                 File file =new File(draftFileName);
                 try {
-                    if(!file.exists()) {
-                        file.createNewFile();
-                    }
                     FileWriter fileWriter =new FileWriter(file);
                     fileWriter.write("");
                     fileWriter.flush();
