@@ -29,7 +29,7 @@ public class FileDemoActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_file_demo);
-
+        // 获取绝对路径+分隔符+本文件的名称 这里命名为demoFile
         mFileName =  getFilesDir().getAbsolutePath() + File.separator + "demoFile.txt";
 
         editText = findViewById(R.id.edit_text);
@@ -52,7 +52,7 @@ public class FileDemoActivity extends AppCompatActivity {
     }
 
     private void saveToFile(final String content) {
-        // hello world
+        // 文件读写操作新创一个线程来进行
         new Thread(new Runnable() {
             @Override
             public void run() {

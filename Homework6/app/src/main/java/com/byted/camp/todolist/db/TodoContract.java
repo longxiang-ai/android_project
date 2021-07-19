@@ -21,7 +21,7 @@ public final class TodoContract {
     }
 
     public static class TodoNote implements BaseColumns {
-        // TODO 2.此处定义表名以及列明
+        // TODO 2.此处定义表名以及列名
         // Table name : note
         // column date: 创建日期
         // column state: 完成/未完成

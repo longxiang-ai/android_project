@@ -5,27 +5,32 @@
     build-mode="COLD"
     density="xxhdpi"
     format="10"
-    ir-eligibility="STATIC_INITIALIZER_CHANGE"
     plugin-version="3.4.1"
-    timestamp="1626678395283"
+    timestamp="1626678849833"
     token="-2889563052173005900"
-    verifier="COLD_SWAP_REQUESTED" >
+    verifier="R_CLASS_CHANGE" >
 
     <task
         name="javac"
-        duration="210" />
+        duration="304" />
     <task
         name="instant-run-dex"
         duration="0" />
     <task
         name="instant-run-transform"
-        duration="7" />
+        duration="33" />
     <task
         name="verifier"
-        duration="6" />
+        duration="14" />
 
     <artifact
+        location="D:\AndroidProject\Homework6\app\build\intermediates\resources\instant-run\debug\resources-debug.apk"
+        type="SPLIT" />
+    <artifact
         location="D:\AndroidProject\Homework6\app\build\intermediates\split-apk\debug\slices\slice_0.apk"
+        type="SPLIT" />
+    <artifact
+        location="D:\AndroidProject\Homework6\app\build\intermediates\split-apk\debug\slices\slice_5.apk"
         type="SPLIT" />
 
     <build
@@ -83,11 +88,16 @@
     </build>
     <build
         build-mode="COLD"
-        ir-eligibility="STATIC_INITIALIZER_CHANGE"
-        timestamp="1626678395283"
-        verifier="COLD_SWAP_REQUESTED" >
+        timestamp="1626678849833"
+        verifier="R_CLASS_CHANGE" >
+        <artifact
+            location="D:\AndroidProject\Homework6\app\build\intermediates\resources\instant-run\debug\resources-debug.apk"
+            type="SPLIT" />
         <artifact
             location="D:\AndroidProject\Homework6\app\build\intermediates\split-apk\debug\slices\slice_0.apk"
+            type="SPLIT" />
+        <artifact
+            location="D:\AndroidProject\Homework6\app\build\intermediates\split-apk\debug\slices\slice_5.apk"
             type="SPLIT" />
     </build>
 

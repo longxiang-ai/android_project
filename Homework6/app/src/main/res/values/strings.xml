@@ -13,9 +13,9 @@
     <string name="write_to_file_hint">Display your content here</string>
 
     <!-- Note -->
-    <string name="take_a_note">Take a note</string>
-    <string name="confirm">Confirm</string>
-    <string name="priority_high">High</string>
-    <string name="priority_medium">Normal</string>
-    <string name="priority_low">Low</string>
+    <string name="take_a_note">添加待办</string>
+    <string name="confirm">确认</string>
+    <string name="priority_high">高优先级</string>
+    <string name="priority_medium">中优先级</string>
+    <string name="priority_low">低优先级</string>
 </resources>

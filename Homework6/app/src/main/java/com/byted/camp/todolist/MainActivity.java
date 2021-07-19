@@ -75,9 +75,11 @@ public class MainActivity extends AppCompatActivity {
                 if (database == null) {
                     return;
                 }
+                // 获取删除的行数
                 int rows = database.delete(TodoContract.TodoNote.TABLE_NAME,
                         TodoContract.TodoNote._ID + "=?",
                         new String[]{String.valueOf(note.id)});
+                // 如果确实发生了删除，则从数据库重新读取一下数据进行刷新
                 if (rows > 0) {
                     notesAdapter.refresh(loadNotesFromDatabase());
                 }
@@ -159,29 +161,33 @@ public class MainActivity extends AppCompatActivity {
         }
         List<Note> result = new LinkedList<>();
         // TODO: 2021/7/19 7. 此处query数据库数据
+        // 用Cursor来对数据库中存储的数据进行遍历
         Cursor cursor = null;
         try {
+            // 查询语句：对每个Todo table的内容进行查询，以降序排列，其余的值均为null
             cursor = database.query(TodoContract.TodoNote.TABLE_NAME, null,
                     null, null,
                     null, null,
                     TodoContract.TodoNote.COLUMN_PRIORITY + " DESC");
 
             while (cursor.moveToNext()) {
+                // 从数据库中拷贝读取的数据
                 long id = cursor.getLong(cursor.getColumnIndex(TodoContract.TodoNote._ID));
                 String content = cursor.getString(cursor.getColumnIndex(TodoContract.TodoNote.COLUMN_CONTENT));
                 long dateMs = cursor.getLong(cursor.getColumnIndex(TodoContract.TodoNote.COLUMN_DATE));
                 int intState = cursor.getInt(cursor.getColumnIndex(TodoContract.TodoNote.COLUMN_STATE));
                 int intPriority = cursor.getInt(cursor.getColumnIndex(TodoContract.TodoNote.COLUMN_PRIORITY));
-
+                // 将结果创建一个新的note,并把复制来的结果写入
                 Note note = new Note(id);
                 note.setContent(content);
                 note.setDate(new Date(dateMs));
                 note.setState(State.from(intState));
                 note.setPriority(Priority.from(intPriority));
-
+                // 将result list中加入这条新的Note
                 result.add(note);
             }
         } finally {
+            // 最后关闭cursor
             if (cursor != null) {
                 cursor.close();
             }
