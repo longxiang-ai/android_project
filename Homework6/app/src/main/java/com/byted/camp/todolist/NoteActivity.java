@@ -38,6 +38,7 @@ public class NoteActivity extends AppCompatActivity {
     private TodoDbHelper dbHelper;
     private SQLiteDatabase database;
 
+    // 选择采用文件读写的方式来存储draft
     // 获取绝对路径+分隔符+本文件的名称 这里命名为draftFile
     private String draftFileName;
     private static boolean needDraft = true;
@@ -141,33 +142,30 @@ public class NoteActivity extends AppCompatActivity {
                     while (inputStream.read(bytes) != -1) {
                         sb.append(new String(bytes));
                     }
-                    if (sb.length()!=0)
+                    if (sb.length()!=0)// 只有当content不为空的时候才进行读取操作
                     {
                         runOnUiThread(new Runnable()
                         {
                             @Override
                             public void run()
                             {
-//                                if (sb.length()!=0) // 只有当content不为空的时候才进行读取操作
-//                                {
-                                    int separatorIndex = sb.lastIndexOf("\t");
-                                    String content = sb.substring(0,separatorIndex);
-                                    editText.setText(content);
-                                    int priority = sb.charAt(separatorIndex+1) -'0';
-                                    Log.i("read node from draft", "当前的priority = "+priority);
-                                    if (priority == Priority.Medium.intValue) {
-                                        AppCompatRadioButton MediumRadio = findViewById(R.id.btn_medium);
-                                        MediumRadio.setChecked(true);
-                                    } else if (priority == Priority.High.intValue)
-                                    {
-                                        AppCompatRadioButton HighRadio = findViewById(R.id.btn_high);
-                                        HighRadio.setChecked(true);
-                                    }
-                                    else if(priority == Priority.Low.intValue){
+                                int separatorIndex = sb.lastIndexOf("\t");
+                                String content = sb.substring(0,separatorIndex);
+                                editText.setText(content);
+                                int priority = sb.charAt(separatorIndex+1) -'0';
+                                Log.d("read node from draft", "当前的priority = "+priority);
+                                if (priority == Priority.Medium.intValue) {
+                                    AppCompatRadioButton MediumRadio = findViewById(R.id.btn_medium);
+                                    MediumRadio.setChecked(true);
+                                } else if (priority == Priority.High.intValue)
+                                {
+                                    AppCompatRadioButton HighRadio = findViewById(R.id.btn_high);
+                                    HighRadio.setChecked(true);
+                                }
+                                else if(priority == Priority.Low.intValue){
 
-                                        lowRadio.setChecked(true);
-                                    }
-//                                }
+                                    lowRadio.setChecked(true);
+                                }
                             }
                         });
                     }
