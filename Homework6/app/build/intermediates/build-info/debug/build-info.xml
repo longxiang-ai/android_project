@@ -2,76 +2,70 @@
 <instant-run
     abi="arm64-v8a,armeabi-v7a,armeabi"
     api-level="29"
-    build-mode="COLD"
+    build-mode="HOT_WARM"
     density="xxhdpi"
     format="10"
     plugin-version="3.4.1"
-    timestamp="1626678849833"
+    timestamp="1626698278252"
     token="-2889563052173005900"
-    verifier="R_CLASS_CHANGE" >
+    verifier="COMPATIBLE" >
 
     <task
         name="javac"
-        duration="304" />
+        duration="191" />
     <task
         name="instant-run-dex"
-        duration="0" />
+        duration="35" />
     <task
         name="instant-run-transform"
-        duration="33" />
+        duration="29" />
     <task
         name="verifier"
-        duration="14" />
+        duration="3" />
 
     <artifact
-        location="D:\AndroidProject\Homework6\app\build\intermediates\resources\instant-run\debug\resources-debug.apk"
-        type="SPLIT" />
-    <artifact
-        location="D:\AndroidProject\Homework6\app\build\intermediates\split-apk\debug\slices\slice_0.apk"
-        type="SPLIT" />
-    <artifact
-        location="D:\AndroidProject\Homework6\app\build\intermediates\split-apk\debug\slices\slice_5.apk"
-        type="SPLIT" />
+        location="D:\AndroidProject\Homework6\app\build\intermediates\reload-dex\debug\classes.dex"
+        type="RELOAD_DEX" />
 
     <build
         build-mode="FULL"
-        timestamp="1626676589445"
+        timestamp="1626696957182"
         verifier="FULL_BUILD_REQUESTED" >
         <artifact
-            location="D:\AndroidProject\Homework6\app\build\intermediates\resources\instant-run\debug\resources-debug.apk"
-            type="SPLIT" />
-        <artifact
-            location="D:\AndroidProject\Homework6\app\build\intermediates\split-apk\debug\dep\dependencies.apk"
-            type="SPLIT" />
-        <artifact
-            location="D:\AndroidProject\Homework6\app\build\intermediates\split-apk\debug\slices\slice_1.apk"
-            type="SPLIT" />
-        <artifact
-            location="D:\AndroidProject\Homework6\app\build\intermediates\split-apk\debug\slices\slice_9.apk"
-            type="SPLIT" />
-        <artifact
-            location="D:\AndroidProject\Homework6\app\build\intermediates\split-apk\debug\slices\slice_6.apk"
-            type="SPLIT" />
-        <artifact
-            location="D:\AndroidProject\Homework6\app\build\intermediates\split-apk\debug\slices\slice_0.apk"
+            location="D:\AndroidProject\Homework6\app\build\intermediates\split-apk\debug\slices\slice_5.apk"
             type="SPLIT" />
         <artifact
             location="D:\AndroidProject\Homework6\app\build\intermediates\split-apk\debug\slices\slice_4.apk"
             type="SPLIT" />
         <artifact
-            location="D:\AndroidProject\Homework6\app\build\intermediates\split-apk\debug\slices\slice_2.apk"
+            location="D:\AndroidProject\Homework6\app\build\intermediates\split-apk\debug\slices\slice_9.apk"
             type="SPLIT" />
         <artifact
-            location="D:\AndroidProject\Homework6\app\build\intermediates\split-apk\debug\slices\slice_5.apk"
+            location="D:\AndroidProject\Homework6\app\build\intermediates\split-apk\debug\dep\dependencies.apk"
+            type="SPLIT" />
+        <artifact
+            location="D:\AndroidProject\Homework6\app\build\intermediates\split-apk\debug\slices\slice_0.apk"
+            type="SPLIT" />
+        <artifact
+            location="D:\AndroidProject\Homework6\app\build\intermediates\resources\instant-run\debug\resources-debug.apk"
+            type="SPLIT" />
+        <artifact
+            location="D:\AndroidProject\Homework6\app\build\intermediates\split-apk\debug\slices\slice_2.apk"
             type="SPLIT" />
         <artifact
             location="D:\AndroidProject\Homework6\app\build\intermediates\split-apk\debug\slices\slice_3.apk"
             type="SPLIT" />
         <artifact
-            location="D:\AndroidProject\Homework6\app\build\intermediates\split-apk\debug\slices\slice_8.apk"
+            location="D:\AndroidProject\Homework6\app\build\intermediates\split-apk\debug\slices\slice_7.apk"
             type="SPLIT" />
         <artifact
-            location="D:\AndroidProject\Homework6\app\build\intermediates\split-apk\debug\slices\slice_7.apk"
+            location="D:\AndroidProject\Homework6\app\build\intermediates\split-apk\debug\slices\slice_1.apk"
+            type="SPLIT" />
+        <artifact
+            location="D:\AndroidProject\Homework6\app\build\intermediates\split-apk\debug\slices\slice_6.apk"
+            type="SPLIT" />
+        <artifact
+            location="D:\AndroidProject\Homework6\app\build\intermediates\split-apk\debug\slices\slice_8.apk"
             type="SPLIT" />
         <artifact
             location="D:\AndroidProject\Homework6\app\build\intermediates\instant-run-apk\debug\app-debug.apk"
@@ -79,26 +73,19 @@
     </build>
     <build
         build-mode="COLD"
-        ir-eligibility="STATIC_INITIALIZER_CHANGE"
-        timestamp="1626678019518"
-        verifier="COLD_SWAP_REQUESTED" >
-        <artifact
-            location="D:\AndroidProject\Homework6\app\build\intermediates\split-apk\debug\slices\slice_7.apk"
-            type="SPLIT" />
-    </build>
-    <build
-        build-mode="COLD"
-        timestamp="1626678849833"
-        verifier="R_CLASS_CHANGE" >
-        <artifact
-            location="D:\AndroidProject\Homework6\app\build\intermediates\resources\instant-run\debug\resources-debug.apk"
-            type="SPLIT" />
-        <artifact
-            location="D:\AndroidProject\Homework6\app\build\intermediates\split-apk\debug\slices\slice_0.apk"
-            type="SPLIT" />
+        timestamp="1626698194260"
+        verifier="CLASS_ADDED" >
         <artifact
             location="D:\AndroidProject\Homework6\app\build\intermediates\split-apk\debug\slices\slice_5.apk"
             type="SPLIT" />
+    </build>
+    <build
+        build-mode="HOT_WARM"
+        timestamp="1626698278252"
+        verifier="COMPATIBLE" >
+        <artifact
+            location="D:\AndroidProject\Homework6\app\build\intermediates\reload-dex\debug\classes.dex"
+            type="RELOAD_DEX" />
     </build>
 
 </instant-run>
