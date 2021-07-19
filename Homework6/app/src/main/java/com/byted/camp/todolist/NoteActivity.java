@@ -78,7 +78,7 @@ public class NoteActivity extends AppCompatActivity {
                 if (TextUtils.isEmpty(content)) {
                     Toast.makeText(NoteActivity.this,
                             "No content to add", Toast.LENGTH_SHORT).show();
-//                    return;
+                    return;
                 }
                 boolean succeed = saveNote2Database(content.toString().trim(),
                         getSelectedPriority());
