@@ -150,7 +150,7 @@ public class NoteActivity extends AppCompatActivity {
                                 String content = sb.substring(0,separatorIndex);
                                 editText.setText(content);
                                 int priority = sb.charAt(separatorIndex+1) -'0';
-                                Log.d("read node from draft", "当前的priority = "+priority);
+                                Log.d("read note from draft", "当前的priority = "+priority);
                                 if (priority == Priority.Medium.intValue) {
                                     AppCompatRadioButton MediumRadio = findViewById(R.id.btn_medium);
                                     MediumRadio.setChecked(true);
