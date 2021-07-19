@@ -3,8 +3,9 @@ package com.byted.camp.todolist.beans;
 import android.graphics.Color;
 
 public enum Priority {
-    High(2, Color.RED),
-    Medium(1, Color.GREEN),
+    // 调整一下ui的颜色配置
+    High(2, Color.YELLOW),
+    Medium(1, Color.BLUE|Color.GREEN),
     Low(0, Color.WHITE);
 
     public final int intValue;

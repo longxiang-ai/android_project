@@ -2,7 +2,9 @@ package com.byted.camp.todolist;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.ContentValues;
 import android.content.Intent;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -17,6 +19,9 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.byted.camp.todolist.beans.Note;
+import com.byted.camp.todolist.beans.Priority;
+import com.byted.camp.todolist.beans.State;
+import com.byted.camp.todolist.db.TodoContract;
 import com.byted.camp.todolist.db.TodoDbHelper;
 import com.byted.camp.todolist.debug.DebugActivity;
 import com.byted.camp.todolist.debug.FileDemoActivity;
@@ -24,6 +29,7 @@ import com.byted.camp.todolist.debug.SpDemoActivity;
 import com.byted.camp.todolist.ui.NoteListAdapter;
 
 import java.util.Collections;
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -66,11 +72,32 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void deleteNote(Note note) {
                 // TODO: 2021/7/19 7. 此处删除数据库数据
+                if (database == null) {
+                    return;
+                }
+                int rows = database.delete(TodoContract.TodoNote.TABLE_NAME,
+                        TodoContract.TodoNote._ID + "=?",
+                        new String[]{String.valueOf(note.id)});
+                if (rows > 0) {
+                    notesAdapter.refresh(loadNotesFromDatabase());
+                }
             }
 
             @Override
             public void updateNote(Note note) {
                 // TODO: 2021/7/19 7. 此处更新数据库数据
+                if (database == null) {
+                    return;
+                }
+                ContentValues values = new ContentValues();
+                values.put(TodoContract.TodoNote.COLUMN_STATE, note.getState().intValue);
+
+                int rows = database.update(TodoContract.TodoNote.TABLE_NAME, values,
+                        TodoContract.TodoNote._ID + "=?",
+                        new String[]{String.valueOf(note.id)});
+                if (rows > 0) {
+                    notesAdapter.refresh(loadNotesFromDatabase());
+                }
             }
         });
         recyclerView.setAdapter(notesAdapter);
@@ -132,6 +159,33 @@ public class MainActivity extends AppCompatActivity {
         }
         List<Note> result = new LinkedList<>();
         // TODO: 2021/7/19 7. 此处query数据库数据
+        Cursor cursor = null;
+        try {
+            cursor = database.query(TodoContract.TodoNote.TABLE_NAME, null,
+                    null, null,
+                    null, null,
+                    TodoContract.TodoNote.COLUMN_PRIORITY + " DESC");
+
+            while (cursor.moveToNext()) {
+                long id = cursor.getLong(cursor.getColumnIndex(TodoContract.TodoNote._ID));
+                String content = cursor.getString(cursor.getColumnIndex(TodoContract.TodoNote.COLUMN_CONTENT));
+                long dateMs = cursor.getLong(cursor.getColumnIndex(TodoContract.TodoNote.COLUMN_DATE));
+                int intState = cursor.getInt(cursor.getColumnIndex(TodoContract.TodoNote.COLUMN_STATE));
+                int intPriority = cursor.getInt(cursor.getColumnIndex(TodoContract.TodoNote.COLUMN_PRIORITY));
+
+                Note note = new Note(id);
+                note.setContent(content);
+                note.setDate(new Date(dateMs));
+                note.setState(State.from(intState));
+                note.setPriority(Priority.from(intPriority));
+
+                result.add(note);
+            }
+        } finally {
+            if (cursor != null) {
+                cursor.close();
+            }
+        }
         return result;
     }
 }

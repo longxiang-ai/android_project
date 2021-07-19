@@ -94,7 +94,17 @@ public class NoteActivity extends AppCompatActivity {
 
     private boolean saveNote2Database(String content, Priority priority) {
         // TODO: 2021/7/19 8. 这里插入数据库
-        return true;
+        if (database == null || TextUtils.isEmpty(content)) {
+            return false;
+        }
+        ContentValues values = new ContentValues();
+        values.put(TodoNote.COLUMN_CONTENT, content);// 填入内容
+        values.put(TodoNote.COLUMN_STATE, State.TODO.intValue);// 填入状态
+        values.put(TodoNote.COLUMN_DATE, System.currentTimeMillis());// 填入时间
+        values.put(TodoNote.COLUMN_PRIORITY, priority.intValue);// 填入优先级
+        // 进行插入操作
+        long rowId = database.insert(TodoNote.TABLE_NAME, null, values);
+        return rowId != -1;
     }
 
     private Priority getSelectedPriority() {

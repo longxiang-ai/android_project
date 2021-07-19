@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "/Users/zhongjinbao/DanceCode/study/bytedance-android-camp-zju-2021/chapter-6/Demo/todolist/app/build/intermediates/incremental/mergeDebugResources/merged.dir/values-kk/values-kk.xml",
+            "outputFile": "D:\\AndroidProject\\Homework6\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-kk\\values-kk.xml",
             "map": [
                 {
-                    "source": "/Users/zhongjinbao/.gradle/caches/transforms-2/files-2.1/818a6411127e3f09665d875804ff1d17/res/values-kk/values-kk.xml",
+                    "source": "C:\\Users\\LiMingwei\\.gradle\\caches\\transforms-2\\files-2.1\\699a391082987db62cb7fb686c97485c\\res\\values-kk\\values-kk.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
@@ -14,7 +14,7 @@
                     }
                 },
                 {
-                    "source": "/Users/zhongjinbao/.gradle/caches/transforms-2/files-2.1/49a9a8954989bee672a3b402b5df4779/res/values-kk/values-kk.xml",
+                    "source": "C:\\Users\\LiMingwei\\.gradle\\caches\\transforms-2\\files-2.1\\4736006c725aa8cb8608c5e3cb9faf88\\res\\values-kk\\values-kk.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
