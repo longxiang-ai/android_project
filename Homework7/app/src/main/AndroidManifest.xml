@@ -3,6 +3,7 @@
     package="com.example.mediaworksdemo">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -18,7 +19,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".PictureDetailActivity" />
-        <activity android:name=".VideoDetailActivity" />
+        <activity android:name=".VideoDetailActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+        />
     </application>
 
 </manifest>
