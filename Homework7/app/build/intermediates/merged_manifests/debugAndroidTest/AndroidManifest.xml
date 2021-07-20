@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.mediaworksdemo.test" >
+    package="com.example.homework7.test" >
 
     <uses-sdk
         android:minSdkVersion="24"
@@ -10,8 +10,8 @@
         android:name="androidx.test.runner.AndroidJUnitRunner"
         android:functionalTest="false"
         android:handleProfiling="false"
-        android:label="Tests for com.example.mediaworksdemo"
-        android:targetPackage="com.example.mediaworksdemo" />
+        android:label="Tests for com.example.homework7"
+        android:targetPackage="com.example.homework7" />
 
     <uses-permission android:name="android.permission.REORDER_TASKS" />
 

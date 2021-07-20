@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">MultiMediaWorksDemo</string>
+    <string name="default_hint">请输入访问图片的地址，不输入则为默认图片</string>
 </resources>
