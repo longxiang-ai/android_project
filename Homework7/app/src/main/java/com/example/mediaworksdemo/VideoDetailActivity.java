@@ -75,7 +75,6 @@ public class VideoDetailActivity extends AppCompatActivity {
             });
         }
         // ------------------ 添加播放本地视频文件功能  ------------------------
-
     }
 
     @Override

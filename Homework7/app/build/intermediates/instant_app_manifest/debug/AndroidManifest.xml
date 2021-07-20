@@ -33,7 +33,7 @@
         <activity
             android:name="com.example.mediaworksdemo.VideoDetailActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
-            android:label="视频播放" >
+            android:label="本地视频播放" >
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
