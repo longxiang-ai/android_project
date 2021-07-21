@@ -86,6 +86,14 @@ public class CustomCameraActivity extends AppCompatActivity implements SurfaceHo
     @Override
     public void surfaceCreated(SurfaceHolder holder) {
         // todo 3.1 设置 camera 和 holder 建立关联
+        try {
+            mCamera.setPreviewDisplay(holder);
+            mCamera.startPreview();
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -107,6 +115,9 @@ public class CustomCameraActivity extends AppCompatActivity implements SurfaceHo
     @Override
     public void surfaceDestroyed(SurfaceHolder holder) {
         // todo 3.2 释放相机
+        mCamera.stopPreview();
+        mCamera.release();
+        mCamera = null;
     }
 
     public void takePhoto(View view) {
@@ -118,13 +129,47 @@ public class CustomCameraActivity extends AppCompatActivity implements SurfaceHo
         @Override
         public void onPictureTaken(byte[] data, Camera camera) {
             // todo 3.3 显示拍照所得图片
+            FileOutputStream fos = null;
+            String filePath = getExternalFilesDir(Environment.DIRECTORY_PICTURES).getAbsolutePath() + File.separator + "1.jpg";
+            File file = new File(filePath);
+            try {
+                fos = new FileOutputStream(file);
+                fos.write(data);
+                fos.flush();
+                Bitmap bitmap = BitmapFactory.decodeFile(filePath);
+                Bitmap rotateBitmap = PathUtils.rotateImage(bitmap,filePath);
+                mImageView.setVisibility(View.VISIBLE);
+                mVideoView.setVisibility(View.GONE);
+                mImageView.setImageBitmap(rotateBitmap);
+            }
+            catch( Exception e)
+            {
+                e.printStackTrace();
+            }finally {
+                mCamera.startPreview();
+                if (fos!=null)
+                {
+                    try {
+                        fos.close();
+                    }
+                    catch (IOException e)
+                    {
+                        e.printStackTrace();
+                    }
+                }
+            }
+
         }
     };
 
     public void record(View view) {
         if (!isRecording) {
             // todo 3.4 开始录制
-
+            if(prepareVideoRecorder())
+            {
+                mRecordButton.setText("暂停");
+                mMediaRecorder.start();
+            }
         } else {
             // 停止录制
             mRecordButton.setText("录制");
@@ -143,7 +188,10 @@ public class CustomCameraActivity extends AppCompatActivity implements SurfaceHo
             mMediaRecorder = null;
             mCamera.lock();
             // todo 3.5 播放录制的视频
-
+            mVideoView.setVisibility(View.VISIBLE);
+            mImageView.setVisibility(View.GONE);
+            mVideoView.setVideoPath(mp4Path);
+            mVideoView.start();
         }
         isRecording = !isRecording;
     }
@@ -182,6 +230,7 @@ public class CustomCameraActivity extends AppCompatActivity implements SurfaceHo
 
     private void releaseMediaRecorder() {
         // todo
+        mMediaRecorder.release();
     }
 
     private String getOutputMediaPath() {
