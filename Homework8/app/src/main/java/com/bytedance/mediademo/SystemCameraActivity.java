@@ -139,7 +139,9 @@ public class SystemCameraActivity extends AppCompatActivity {
         if (requestCode == REQUEST_CODE_TAKE_PHOTO && resultCode == RESULT_OK)
         {
             // todo 1.2 在 data 中直接获取 bitmap
+            assert data != null;
             Bundle extras = data.getExtras();
+            assert extras != null;
             Bitmap bitmap = (Bitmap) extras.get("data");
             imageView.setImageBitmap(bitmap);
         } else if (requestCode == REQUEST_CODE_TAKE_PHOTO_PATH && resultCode == RESULT_OK) {
@@ -153,7 +155,6 @@ public class SystemCameraActivity extends AppCompatActivity {
             int photoHeight = options.outHeight;
 
             int scaleFactor = Math.min(photoHeight/targetHeight, photoWidth/targetWidth);
-
             options.inJustDecodeBounds = false;
             options.inSampleSize = scaleFactor;
             Bitmap bitmap = BitmapFactory.decodeFile(takeImagePath,options);
@@ -161,6 +162,4 @@ public class SystemCameraActivity extends AppCompatActivity {
             imageView.setImageBitmap(bitmap);
         }
     }
-
-
 }
